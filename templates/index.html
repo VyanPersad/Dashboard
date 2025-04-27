@@ -14,10 +14,16 @@
         justify-items: center;
     }
     .result{
-        height: 100px;
+        height: fit-content;
+        max-height: 250px;
+        margin-bottom: 10px;
         color: #000000;
         display: grid; 
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(1, 1fr); 
+        overflow-y: auto;
+    }
+    .row{
+        height: fit-content;
     }
     .parent {
         display: grid; 
@@ -61,7 +67,7 @@
         border-radius: 5px;
         height: 25px;
     }
-    #addButton{
+    #addButton, #delButton, #updateButton,#serButton{
         font-size: 20px;
         font-weight: bold;
         color: #000000;
@@ -70,6 +76,7 @@
         border-radius: 5px;
         height: 30px;
         width: 100px;
+        margin-top: 5px;
     }
 </style>
 <html>
@@ -86,12 +93,34 @@
                 <input type="text" class="add" name="addCode">
                 <input type="text" class="add" name="addModel">
                 <input type="text" class="add" name="addPrice">
-                <input type="submit" value="Add" id="addButton">
+                <input type="submit" value="Add" name = addButton id="addButton">
+            </form>
+            <form class="delForm" method="POST">
+                <input type="Submit" value="Delete All" name="delAllButton" id="delButton">
+            </form>
+            <form class="delForm" method="POST">
+                <input type="text" class="add" name="delCode">
+                <input type="submit" value="Delete" name="delButton" id="delButton">
+            </form>
+            <form class="upDateForm" method="POST">
+                <input type="text" class="add" name="upCode">
+                <input type="text" class="add" name="upModel">
+                <input type="text" class="add" name="upPrice">
+                <input type="submit" value="Update" name = updateButton id="updateButton">
             </form>
         </div>
-        <div class="result">
+        <form class="serForm" method="POST">
+            <input type="text" class="add" name="serCode">
+            <input type="submit" value="Search" name="serButton" id="serButton">
+        </form>
+        <div class="result"> 
             {% for row in rows %}
-                <div class="">{{row.code}} {{row.model}} {{row.price}}</div>
+                <div class="row">{{row.code}} {{row.model}} {{row.price}}</div>
+            {% endfor %} 
+        </div>
+        <div class="result">
+            {% for search in searchs %}
+                <div class="row">{{search.code}} {{search.model}} {{search.price}}</div>
             {% endfor %} 
         </div>
         <div class="parent">

@@ -18,7 +18,6 @@ def insert(code, model, price):
     data_comm.commit()
     data_comm.close()
 
-
 def viewAll():
     data_comm = sqlite3.connect("product.db")
     data_comm.row_factory = sqlite3.Row
@@ -28,14 +27,12 @@ def viewAll():
     data_comm.close()
     return rows
 
-
 def delete(code):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
-    cursor.execute("DELETE FROM product WHERE item=?", (code, ))
+    cursor.execute("DELETE FROM product WHERE code=?", (code, ))
     data_comm.commit()
     data_comm.close()
-
 
 def deleteAll():
     data_comm = sqlite3.connect("product.db")
@@ -45,14 +42,24 @@ def deleteAll():
     data_comm.close()
     print("Everything Deleted")
 
-
 def update(code, model, price):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
     cursor.execute("UPDATE product SET model=?, price=? WHERE code=?",
-                   (code, model, price))
+                   (model, price, code))
     data_comm.commit()
     data_comm.close()
+
+def searchDB(search_term):
+    data_comm = sqlite3.connect("product.db")
+    data_comm.row_factory = sqlite3.Row
+    cursor = data_comm.cursor()
+    if search_term:
+        search_term = f"%{search_term}%"
+        cursor.execute("SELECT * FROM product WHERE code LIKE ? OR model LIKE ? OR price LIKE ?", (search_term, search_term, search_term))
+    rows = cursor.fetchall()
+    data_comm.close()
+    return rows
 
 '''
 #create_table()
