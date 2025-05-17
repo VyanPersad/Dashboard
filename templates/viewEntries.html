@@ -81,34 +81,7 @@
 </style>
 <html>
     <body>
-        <div class="time">
-            <div id="year">{{year}}</div>
-            <div class="date">
-                <div id="day">{{day}}</div>
-                <div id="month">{{month}}</div>
-            </div>
-        </div>
-        <div>
-            <form class="addForm" method="POST">
-                <input type="text" class="add" name="addCode">
-                <input type="text" class="add" name="addModel">
-                <input type="text" class="add" name="addPrice">
-                <input type="submit" value="Add" name = addButton id="addButton">
-            </form>
-            <form class="delForm" method="POST">
-                <input type="Submit" value="Delete All" name="delAllButton" id="delButton">
-            </form>
-            <form class="delForm" method="POST">
-                <input type="text" class="add" name="delCode">
-                <input type="submit" value="Delete" name="delButton" id="delButton">
-            </form>
-            <form class="upDateForm" method="POST">
-                <input type="text" class="add" name="upCode">
-                <input type="text" class="add" name="upModel">
-                <input type="text" class="add" name="upPrice">
-                <input type="submit" value="Update" name = updateButton id="updateButton">
-            </form>
-        </div>
+
         <div class="result"> 
             {% for row in rows %}
                 <div class="row">{{row.code}} {{row.model}} {{row.price}}</div>
@@ -123,24 +96,15 @@
                 <div class="row">{{search.code}} {{search.model}} {{search.price}}</div>
             {% endfor %} 
         </div>
+        <div class="result">
+            {% for output in outputs %}
+                <div class="row">{{output.Sku}} {{output.Description}} {{output.Cash_Price}}</div>
+            {% endfor %}
+
+        </div>
         <form class="delForm" method="POST">
             <input type="Submit" value="Go To" name="goToButton" id="delButton">
         </form>
 
-        <div class="parent">
-            <div class="card">
 
-            </div>
-            <div class="card">
-                
-            </div>
-            <div class="card">
-                
-            </div>
-            <div class="card">
-                
-            </div>
-        </div>
-        
-    </body>
 </html>

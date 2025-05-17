@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+
+def read_from_file(filepath, test=0, n=5, header=None, col_Names = [], sheet = 0):
+    filetype = filepath.split('.')[1]
+    #This will read the csv and display the first 5 rows of the data.
+    if (filetype == 'csv'):
+        if (col_Names == []):
+            dataFrame = pd.read_csv(filepath)
+            #dataFrame = pd.read_csv(filepath, sep=';')
+            #In the abobve line we tell python to use the ; as the spearator.
+            if (test == 0):
+                print('Set test to 1 to view sample datraframes, Default is the first 5 rows, set n to vary the number of rows.')
+            elif (test == 1):
+                print(dataFrame.head(n))
+        elif (col_Names != []):
+            dataFrame = pd.read_csv(filepath, names=col_Names)
+            #dataFrame = pd.read_csv(filepath, sep=';')
+            #In the abobve line we tell python to use the ; as the spearator.
+            if (test == 0):
+                print('Set test to 1 to view sample datraframes, Default is the first 5 rows, set n to vary the number of rows.')
+            elif (test == 1):
+                print(dataFrame.head(n))
+
+        return dataFrame
+
+    elif (filetype == 'xlsx'):
+        xlFile = pd.ExcelFile(filepath)  
+        sheetName = xlFile.sheet_names[sheet]
+        dataFrame = xlFile.parse(f'{sheetName}')
+        if (test == 0):
+            print('Set test to 1 to view sample datraframes, Default is the first 5 rows, set n to vary the numbe rof rows.')
+        elif (test == 1):
+            print(dataFrame.head(n))
+
+        return dataFrame
+    
+def readCols(dataFrame, colName1, colName2, colName3):
+    dF = dataFrame[[colName1, colName2, colName3]]
+    return dF
+
+def linePlot(dataFrame, X=None, Y=None,title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):
+    plt.plot(dataFrame[X], dataFrame[Y])
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.legend(loc = (xloc, yloc))
+    plt.tight_layout()
+    plt.show()

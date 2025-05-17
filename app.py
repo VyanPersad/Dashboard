@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime as dt
 from sqliteDB3 import *
+from xcelFunc import *
 
 app = Flask(__name__)
 create_table()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    search_term = None
     year = dt.now().year
     day = dt.now().day 
     month = dt.strftime(dt.now(),'%B')
@@ -34,16 +36,43 @@ def home():
             update(code, model, price)
             print("Data Updated") 
 
+        elif request.form.get("serButton")=="Search":
+            search_term = request.form.get("serCode")
+            print(f"Search Term: {search_term}")    
+
+        elif request.form.get("goToButton")=="Go To":
+             print("Going to viewEntries")
+             return redirect(url_for('viewEntries'))
+        
     rows = viewAll()
-    
+    searchs = searchDB(search_term)  
+
+    return render_template('index.html', year=year, day=day, month=month, rows=rows, searchs=searchs) 
+
+@app.route('/viewEntries', methods=['GET', 'POST'])
+def viewEntries():
     search_term = None
+
+    mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku', 'Description', 'Cash_Price'])
+    print(mainDF.columns)
+    outputs = mainDF.to_dict(orient='records')
+    
+    print("Start")
+    print(outputs[:10])
+    print("End")
+    
     if request.method == 'POST':
         if request.form.get("serButton")=="Search":
             search_term = request.form.get("serCode")
-            print(f"Search Term: {search_term}")
-    searchs = searchDB(search_term)
+            print(f"Search Term: {search_term}")  
 
-    return render_template('index.html', year=year, day=day, month=month, rows=rows, searchs=searchs) 
+        elif request.form.get("goToButton")=="Go To":
+             print("Going to home")
+             return redirect(url_for('home'))      
+            
+    rows = viewAll()
+    searchs = searchDB(search_term)
+    return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
 
 if __name__ == '__main__':
     app.run(debug=True)
