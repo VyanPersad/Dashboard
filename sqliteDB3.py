@@ -25,7 +25,13 @@ def viewAll():
     cursor.execute("SELECT * FROM product")
     rows = cursor.fetchall()
     data_comm.close()
-    return rows
+
+    formatted_rows = []
+    for row in rows:
+        formatted_row = dict(row)
+        formatted_row['price'] = "{:.2f}".format(formatted_row['price'])
+        formatted_rows.append(formatted_row)
+    return formatted_rows
 
 def delete(code):
     data_comm = sqlite3.connect("product.db")
@@ -59,7 +65,13 @@ def searchDB(search_term):
         cursor.execute("SELECT * FROM product WHERE code LIKE ? OR model LIKE ? OR price LIKE ?", (search_term, search_term, search_term))
     rows = cursor.fetchall()
     data_comm.close()
-    return rows
+
+    formatted_rows = []
+    for row in rows:
+        formatted_row = dict(row)
+        formatted_row['price'] = "{:.2f}".format(formatted_row['price'])
+        formatted_rows.append(formatted_row)
+    return formatted_rows
 
 '''
 #create_table()

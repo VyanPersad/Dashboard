@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime as dt
 from sqliteDB3 import *
 from xcelFunc import *
+import locale
 
 app = Flask(__name__)
 create_table()
@@ -17,7 +18,7 @@ def home():
             code = request.form.get("addCode")
             model = request.form.get("addModel")
             price = request.form.get("addPrice")
-            print(f"Code: {code}, Model: {model}, Price: {price}")
+            #print(f"Code: {code}, Model: {model}, Price: {price}")
             insert(code, model, price)
             print("Data Inserted") 
             
@@ -53,13 +54,9 @@ def home():
 def viewEntries():
     search_term = None
 
-    mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku', 'Description', 'Cash_Price'])
-    print(mainDF.columns)
+    mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash_Price'], searchCol='Year', searchTerm='This Year')
+    mainDF['Cash_Price'] = mainDF['Cash_Price'].round(2).apply(lambda x: f'{x:.2f}')
     outputs = mainDF.to_dict(orient='records')
-    
-    print("Start")
-    print(outputs[:10])
-    print("End")
     
     if request.method == 'POST':
         if request.form.get("serButton")=="Search":
