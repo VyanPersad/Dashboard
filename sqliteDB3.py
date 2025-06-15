@@ -10,13 +10,15 @@ def create_table():
     data_comm.commit()
     data_comm.close()
 
-
 def insert(code, model, price):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
     cursor.execute("INSERT INTO product VALUES (?,?,?)", (code, model, price))
     data_comm.commit()
     data_comm.close()
+    code = ""
+    model = ""
+    price = ""
 
 def viewAll():
     data_comm = sqlite3.connect("product.db")

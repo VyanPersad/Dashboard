@@ -1,85 +1,6 @@
 <!DOCTYPE html>
-<style>
-    html{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    body{
-        height: 95vh;
-        width: auto;
-        display: grid; 
-        grid-template-rows: repeat(1, auto); 
-    }
-    .time{
-        align-items: center;
-        justify-items: center;
-    }
-    .result{
-        height: fit-content;
-        max-height: 250px;
-        margin-bottom: 10px;
-        color: #000000;
-        display: grid; 
-        grid-template-columns: repeat(1, 1fr); 
-        overflow-y: auto;
-    }
-    .row{
-        height: fit-content;
-    }
-    .parent {
-        display: grid; 
-        grid-template-columns: repeat(4, 1fr); 
-        margin-top: auto;
-        margin-bottom: 20px;
-        gap: 10px 20px; 
-    }
-    .card{
-        border-radius: 10px;
-        height: 250px;
-        background-color: gray;
-    }
-    .date{
-        width: 125px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    #year{
-        font-size: 50px;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        text-justify: auto;
-        width: 250px;
-    }
-    #day, #month{
-        font-size: 35px;
-        font-weight: bold;
-        color: #000000;
-        align-items: center;
-        text-align: center;
-        text-justify: auto;
-    }
-    .add{
-        font-size: 20px;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        text-justify: auto;
-        border-radius: 5px;
-        height: 25px;
-    }
-    #addButton, #delButton, #updateButton,#serButton{
-        font-size: 20px;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        text-justify: auto;
-        border-radius: 5px;
-        height: 30px;
-        width: 100px;
-        margin-top: 5px;
-    }
-</style>
 <html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <body>
         <div class="time">
             <div id="year">{{year}}</div>
@@ -95,13 +16,15 @@
                 <input type="text" class="add" name="addPrice">
                 <input type="submit" value="Add" name = addButton id="addButton">
             </form>
-            <form class="delForm" method="POST">
-                <input type="Submit" value="Delete All" name="delAllButton" id="delButton">
-            </form>
-            <form class="delForm" method="POST">
-                <input type="text" class="add" name="delCode">
-                <input type="submit" value="Delete" name="delButton" id="delButton">
-            </form>
+            <div class="sidebyside">
+                <form class="delForm" method="POST">
+                    <input type="text" class="add" name="delCode">
+                    <input type="submit" value="Delete" name="delButton" id="delButton">
+                </form>
+                <form class="delForm" method="POST">
+                    <input type="Submit" value="Delete All" name="delAllButton" id="delButton">
+                </form>
+            </div>
             <form class="upDateForm" method="POST">
                 <input type="text" class="add" name="upCode">
                 <input type="text" class="add" name="upModel">
@@ -111,13 +34,24 @@
         </div>
         <div class="result"> 
             {% for row in rows %}
-                <div class="row">{{row.code}} {{row.model}} {{row.price}}</div>
+                <div class="row">
+                    <div class="col">{{row.code}}</div>
+                    <div class="col">{{row.model}}</div>
+                    <div class="col">$ {{row.price}}</div>
+                </div>
             {% endfor %} 
         </div>
-        <form class="serForm" method="POST">
-            <input type="text" class="add" name="serCode">
-            <input type="submit" value="Search" name="serButton" id="serButton">
-        </form>
+        <div class="sidebyside">
+            <form class="serForm" method="POST">
+                <input type="text" class="add" name="serCode">
+                <input type="submit" value="Search" name="serButton" id="serButton">
+            </form>
+            <form>
+                <form class="Button" method="POST">
+                <input type="Submit" value="Clear All" name="clearButton" id="clearButton">
+                </form>
+            </form>
+        </div>
         <div class="result">
             {% for search in searchs %}
                 <div class="row">{{search.code}} {{search.model}} {{search.price}}</div>
@@ -126,7 +60,9 @@
         <form class="delForm" method="POST">
             <input type="Submit" value="Go To" name="goToButton" id="delButton">
         </form>
-
+        <form class="Button" method="POST">
+            <input type="Submit" value="Go To View" name="goToButton" id="Button">
+        </form>
         <div class="parent">
             <div class="card">
 
@@ -140,7 +76,6 @@
             <div class="card">
                 
             </div>
-        </div>
-        
+        </div>      
     </body>
 </html>

@@ -1,0 +1,61 @@
+html{
+  height: 100%;
+  background: linear-gradient(#1d4071,#14203c);
+}
+.tab-container {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-between; /* Distribute space evenly */
+  align-items: center; /* Vertically center the tabs */
+  background-color: #15223f; /* Optional background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  margin: 5px;
+}
+
+.tab-panel {
+  flex-grow: 1;
+  height: 80%;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer; /* Indicate it's clickable */
+  background-color: #2d3852;
+  border: 1px solid #ccc; /* Optional border for each tab */
+}
+
+.tab-panel:hover {
+  background-color: #e0e0e0; /* Optional hover effect */
+}
+.tab-panel.clicked {
+  background-color: #d0d0d0; /* Active tab color */
+  border-bottom: 2px solid #007bff; /* Highlight active tab */
+}
+
+.main-body{
+  width: 100%;
+  height: 445px;
+  display: flex;
+  overflow-y: auto; 
+  background-color: #15223f; 
+  justify-content: space-between; 
+  align-items: center;
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  align-items: center;
+  margin: 15px 5px;
+}
+
+#Button{
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  text-justify: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  height: 45px;
+  width: 150px;
+  margin-bottom: 5px;
+} 
