@@ -46,12 +46,13 @@ def readCols(dataFrame, colName1, colName2, colName3):
 def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):
     thisYear = dataFrame[dataFrame['Year'] == 'This Year']
     selectSKU = thisYear[thisYear['Sku'] == searchTerm]
-    all_month_names = ['April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December','January', 'February', 'March']
+    all_month_names = ['April', 'May', 'June','July', 'August', 'September', 
+                       'October', 'November', 'December','January', 'February', 'March']
     selectSKU = selectSKU.set_index('Sku')
     selectSKU = selectSKU.T
     selectSKU = selectSKU[selectSKU.index.isin(all_month_names)]
-    print(selectSKU)
-    plt.plot(selectSKU.index, selectSKU[searchTerm], marker='o', label='')
+    #print(selectSKU)
+    plt.plot(selectSKU.index, selectSKU[searchTerm], marker='', label='')
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)

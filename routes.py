@@ -65,28 +65,32 @@ def my_routes(app):
         'April','May','June','July','August','September','October','November','December','January','February','March'], 
         searchCol='Year', searchTerm='This Year')
         mainDF['Cash_Price'] = mainDF['Cash_Price'].round(2).apply(lambda x: f'{x:.2f}')
-        salesDF= mainDF[['Sku','Year', 'April','May','June','July','August','September','October','November','December','January','February','March']]
+        salesDF = mainDF[['Sku','Year', 'April','May','June','July','August','September','October','November','December','January','February','March']]
         outputs = mainDF.to_dict(orient='records')
-        
-        linePlot(salesDF, searchTerm='1060F9', title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
-        
+        months = ['April', 'May', 'June', 'July', 'August', 'September',
+                  'October', 'November', 'December', 'January', 'February', 'March']
         if request.method == 'POST':
             if request.form.get("serButton")=="Search":
                 search_term = request.form.get("serCode")
-                print(f"Search Term: {search_term}")  
+                linePlot(salesDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
+                plots=salesDF[salesDF['Sku'] == search_term].to_dict(orient='records')
+                #print(plots)
+                #print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
                 print("Going to home")
                 return redirect(url_for('home'))      
                 
-        rows = viewAll()
-        searchs = searchDB(search_term)
-        return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
+        #rows = viewAll()
+        #searchs = searchDB(search_term)
+        #return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
+        return render_template('viewEntries.html', outputs=outputs, plots=plots, months=months)
+        
 
     @app.route('/layout', methods=['GET', 'POST'])
     def viewLayout():
         if request.method == 'POST':
-            if request.form.get("serButton")=="Search":
-                search_term = request.form.get("serCode")
-                print(f"Search Term: {search_term}")  
+            if request.form.get("goToButton")=="Go To View":
+                return redirect(url_for('home'))
+
         return render_template('viewLayout.html')

@@ -31,6 +31,19 @@
             {% endfor %} 
         </div>
         <div class="result">
+            {% for pts in plots %}
+                <div class="row">
+                    <div>{{pts.Sku}}</div> 
+                    <div>{{pts.Year}}</div> 
+                    <div class="month">
+                        {% for month in months %}
+                            <div>{{pts[month]}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %} 
+        </div>
+        <div class="result">
             {% for output in outputs %}
                 <div class="row">
                     <div>{{output.Sku}}</div>
