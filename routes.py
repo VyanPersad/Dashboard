@@ -86,7 +86,6 @@ def my_routes(app):
         #return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
         return render_template('viewEntries.html', outputs=outputs, plots=plots, months=months)
         
-
     @app.route('/layout', methods=['GET', 'POST'])
     def viewLayout():
         if request.method == 'POST':
