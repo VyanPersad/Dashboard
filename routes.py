@@ -60,22 +60,20 @@ def my_routes(app):
     @app.route('/viewEntries', methods=['GET', 'POST'])
     def viewEntries():
         search_term = None
-
         mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash_Price','Year',
         'April','May','June','July','August','September','October','November','December','January','February','March'], 
         searchCol='Year', searchTerm='This Year')
         mainDF['Cash_Price'] = mainDF['Cash_Price'].round(2).apply(lambda x: f'{x:.2f}')
-        salesDF = mainDF[['Sku','Year', 'April','May','June','July','August','September','October','November','December','January','February','March']]
-        outputs = mainDF.to_dict(orient='records')
         months = ['April', 'May', 'June', 'July', 'August', 'September',
                   'October', 'November', 'December', 'January', 'February', 'March']
+        salesDF = mainDF[['Sku','Year']+months]        
+        outputs = mainDF.to_dict(orient='records')
+        
         if request.method == 'POST':
             if request.form.get("serButton")=="Search":
                 search_term = request.form.get("serCode")
                 linePlot(salesDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
-                plots=salesDF[salesDF['Sku'] == search_term].to_dict(orient='records')
-                #print(plots)
-                #print(f"Search Term: {search_term}")  
+                print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
                 print("Going to home")
@@ -84,7 +82,7 @@ def my_routes(app):
         #rows = viewAll()
         #searchs = searchDB(search_term)
         #return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
-        return render_template('viewEntries.html', outputs=outputs, plots=plots, months=months)
+        return render_template('viewEntries.html', outputs=outputs)
         
     @app.route('/layout', methods=['GET', 'POST'])
     def viewLayout():

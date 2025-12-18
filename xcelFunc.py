@@ -43,7 +43,7 @@ def readCols(dataFrame, colName1, colName2, colName3):
     dF = dataFrame[[colName1, colName2, colName3]]
     return dF
 
-def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):
+def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):   
     thisYear = dataFrame[dataFrame['Year'] == 'This Year']
     selectSKU = thisYear[thisYear['Sku'] == searchTerm]
     all_month_names = ['April', 'May', 'June','July', 'August', 'September', 
@@ -59,3 +59,5 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.legend(loc = (xloc, yloc))
     plt.tight_layout()
     plt.show()
+    plt.savefig('static/Test_Sales.png')
+    plt.close()

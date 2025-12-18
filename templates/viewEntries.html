@@ -31,6 +31,12 @@
             {% endfor %} 
         </div>
         <div class="result">
+            <div class="row">
+                <img src="{{ url_for('static', filename='Test_Sales.png') }}?v={{ range(1, 99999) | random }}">
+            </div>
+        </div>
+        <!--
+        <div class="result">
             {% for pts in plots %}
                 <div class="row">
                     <div>{{pts.Sku}}</div> 
@@ -42,7 +48,7 @@
                     </div>
                 </div>
             {% endfor %} 
-        </div>
+        </div>-->
         <div class="result">
             {% for output in outputs %}
                 <div class="row">
