@@ -72,7 +72,7 @@ def my_routes(app):
         if request.method == 'POST':
             if request.form.get("serButton")=="Search":
                 search_term = request.form.get("serCode")
-                linePlot(salesDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
+                #linePlot(salesDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
                 print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
@@ -81,8 +81,8 @@ def my_routes(app):
                 
         #rows = viewAll()
         #searchs = searchDB(search_term)
-        #return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
-        return render_template('viewEntries.html', outputs=outputs)
+        return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
+        #return render_template('viewEntries.html', outputs=outputs)
         
     @app.route('/layout', methods=['GET', 'POST'])
     def viewLayout():
