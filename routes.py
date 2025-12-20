@@ -59,29 +59,34 @@ def my_routes(app):
 
     @app.route('/viewEntries', methods=['GET', 'POST'])
     def viewEntries():
-        search_term = None
-        mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash_Price','Year',
+        search_term = []
+        searches = []
+        mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Year',
         'April','May','June','July','August','September','October','November','December','January','February','March'], 
         searchCol='Year', searchTerm='This Year')
-        mainDF['Cash_Price'] = mainDF['Cash_Price'].round(2).apply(lambda x: f'{x:.2f}')
-        months = ['April', 'May', 'June', 'July', 'August', 'September',
-                  'October', 'November', 'December', 'January', 'February', 'March']
-        salesDF = mainDF[['Sku','Year']+months]        
+        mainDF['Cash Price'] = mainDF['Cash Price'].round(2).apply(lambda x: f'{x:.2f}')
+        mainDF['Description'] = mainDF['Description'].str.split('- ').str[1] 
+        months = ['April', 'May', 'June', 
+                  'July', 'August', 'September',
+                  'October', 'November', 'December', 
+                  'January', 'February', 'March']        
         outputs = mainDF.to_dict(orient='records')
-        
+        #print(outputs)
         if request.method == 'POST':
             if request.form.get("serButton")=="Search":
                 search_term = request.form.get("serCode")
-                #linePlot(salesDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
-                print(f"Search Term: {search_term}")  
+                searches = search_DF(mainDF, search_term).to_dict(orient='records')
+                #print(searches)
+                linePlot(mainDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
+                #print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
                 print("Going to home")
                 return redirect(url_for('home'))      
                 
-        #rows = viewAll()
+        rows = viewAll()
         #searchs = searchDB(search_term)
-        return render_template('viewEntries.html', rows=rows, searchs=searchs, outputs=outputs)
+        return render_template('viewEntries.html', rows=rows, searches=searches, outputs=outputs, months=months)
         #return render_template('viewEntries.html', outputs=outputs)
         
     @app.route('/layout', methods=['GET', 'POST'])

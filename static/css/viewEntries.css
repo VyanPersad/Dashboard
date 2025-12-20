@@ -11,6 +11,13 @@
         align-items: center;
         justify-items: center;
     }
+    .serform{
+        display: grid; 
+        grid-template-columns: repeat(4, auto); 
+        justify-items: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
     .result{
         height: fit-content;
         max-height: 275px;
@@ -23,14 +30,29 @@
         grid-template-columns: repeat(1, 1fr); 
         overflow-y: auto;
     }
+    .img_result{
+        height: fit-content;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        color: #000000;
+        background-color: lightgray;
+        display: grid; 
+        grid-template-columns: repeat(1, 1fr); 
+        justify-items: center;
+    }
+    img{
+        margin: auto;
+        height: 20vw;
+        width: 50vw;
+    }
     .row{
         display: grid;
-        grid-template-columns: 10% 10% 50% 10% 10%;
+        grid-template-columns: 10% 10% 25% 10% 30%;
         font-size: 12px;
         height: fit-content;
         margin-bottom: 5px;
     }
-
     .cash{
         display: grid;
         grid-template-columns: 25% 35%;
@@ -86,4 +108,5 @@
         height: 30px;
         width: 100px;
         margin-top: 5px;
+        margin-bottom: 10px;
     }

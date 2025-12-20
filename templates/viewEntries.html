@@ -19,23 +19,22 @@
             <input type="submit" value="Search" name="serButton" id="serButton">
         </form>
         <div class="result">
-            {% for search in searchs %}
+            {% for search in searches %}
                 <div class="row">
-                    <div>{{search.code}}</div> 
-                    <div>{{search.model}}</div> 
+                    <div>{{search.Sku}}</div>
+                    <div>{{search.Brand}}</div>
+                    <div>{{search.Description}}</div>
                     <div class="cash">
-                        <div>$</div>
-                        <div>{{search.price}}</div>
+                        <div>$</div> 
+                        <div>{{search['Cash Price']}}</div>
                     </div>
                 </div>
             {% endfor %} 
         </div>
-        <div class="result">
-            <div class="row">
-                <img src="{{ url_for('static', filename='Test_Sales.png') }}?v={{ range(1, 99999) | random }}">
-            </div>
+        <div class="img_result">
+            <img src="{{ url_for('static', filename='Test_Sales.png') }}?v={{ range(1, 99999) | random }}">
         </div>
-        <!--
+        <!-- Plot Section
         <div class="result">
             {% for pts in plots %}
                 <div class="row">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
             {% endfor %} 
-        </div>-->
+        </div> -->
         <div class="result">
             {% for output in outputs %}
                 <div class="row">
@@ -57,7 +56,12 @@
                     <div>{{output.Description}}</div>
                     <div class="cash">
                         <div>$</div> 
-                        <div>{{output.Cash_Price}}</div>
+                        <div>{{output['Cash Price']}}</div>
+                    </div>
+                    <div class="month">
+                        {% for month in months %}
+                        <div>{{output[month]}}</div>
+                        {% endfor %}
                     </div>
                 </div>
             {% endfor %}

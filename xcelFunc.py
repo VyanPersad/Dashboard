@@ -43,11 +43,17 @@ def readCols(dataFrame, colName1, colName2, colName3):
     dF = dataFrame[[colName1, colName2, colName3]]
     return dF
 
+def search_DF(dataFrame, searchTerm):
+    df = dataFrame[dataFrame['Sku'] == searchTerm]
+    return df
+
 def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):   
     thisYear = dataFrame[dataFrame['Year'] == 'This Year']
     selectSKU = thisYear[thisYear['Sku'] == searchTerm]
     all_month_names = ['April', 'May', 'June','July', 'August', 'September', 
                        'October', 'November', 'December','January', 'February', 'March']
+    month_abbr = ['Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 
+                  'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar']
     selectSKU = selectSKU.set_index('Sku')
     selectSKU = selectSKU.T
     selectSKU = selectSKU[selectSKU.index.isin(all_month_names)]
@@ -55,9 +61,10 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.plot(selectSKU.index, selectSKU[searchTerm], marker='', label='')
     plt.title(title)
     plt.xlabel(xlabel)
+    plt.xticks(ticks=all_month_names, labels=month_abbr)
     plt.ylabel(ylabel)
     plt.legend(loc = (xloc, yloc))
     plt.tight_layout()
-    plt.show()
     plt.savefig('static/Test_Sales.png')
+
     plt.close()
