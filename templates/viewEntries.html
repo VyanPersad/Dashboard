@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/viewEntries.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <body>
         <div class="result"> 
             {% for row in rows %}
@@ -34,6 +35,7 @@
         <div class="img_result">
             <img src="{{ url_for('static', filename='Test_Sales.png') }}?v={{ range(1, 99999) | random }}">
         </div>
+        <div style="width: 25%; height: 45%"><canvas id="myChart"></canvas></div>
         <!-- Plot Section
         <div class="result">
             {% for pts in plots %}
@@ -69,4 +71,28 @@
         <form class="delForm" method="POST">
             <input type="Submit" value="Go To" name="goToButton" id="delButton">
         </form>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{ chart_labels | tojson }},
+                        datasets: [{
+                            label: 'Sales Data',
+                            data: {{ chart_data | tojson }},
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
 </html>

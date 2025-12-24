@@ -78,6 +78,9 @@ def my_routes(app):
                 searches = search_DF(mainDF, search_term).to_dict(orient='records')
                 #print(searches)
                 linePlot(mainDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
+                results = searches[0]
+                data = [results[m] for m in months]
+                print(data)
                 #print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
@@ -86,7 +89,7 @@ def my_routes(app):
                 
         rows = viewAll()
         #searchs = searchDB(search_term)
-        return render_template('viewEntries.html', rows=rows, searches=searches, outputs=outputs, months=months)
+        return render_template('viewEntries.html', rows=rows, searches=searches, outputs=outputs, months=months, chart_labels = months, chart_data = data)
         #return render_template('viewEntries.html', outputs=outputs)
         
     @app.route('/layout', methods=['GET', 'POST'])
