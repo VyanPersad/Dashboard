@@ -20,6 +20,16 @@ def insert(code, model, price):
     model = ""
     price = ""
 
+def bulkInsert(bulk_data):
+    data_comm = sqlite3.connect("product.db")
+    cursor = data_comm.cursor()
+    cursor.executemany("INSERT INTO product VALUES (?,?,?)", bulk_data)
+    data_comm.commit()
+    data_comm.close()
+    code = ""
+    model = ""
+    price = ""
+
 def viewAll():
     data_comm = sqlite3.connect("product.db")
     data_comm.row_factory = sqlite3.Row

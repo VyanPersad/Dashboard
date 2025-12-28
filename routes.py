@@ -80,7 +80,7 @@ def my_routes(app):
                 linePlot(mainDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
                 results = searches[0]
                 data = [results[m] for m in months]
-                print(data)
+                #print(data)
                 #print(f"Search Term: {search_term}")  
 
             elif request.form.get("goToButton")=="Go To":
