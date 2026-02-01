@@ -5,6 +5,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
+        <!-- Entries Section 
         <div class="result"> 
             {% for row in rows %}
                 <div class="row">
@@ -17,6 +18,7 @@
                 </div>
             {% endfor %} 
         </div>
+        -->
         <form class="serForm" method="POST">
             <input type="text" class="add" name="serCode">
             <input type="submit" value="Search" name="serButton" id="serButton">
@@ -34,9 +36,11 @@
                 </div>
             {% endfor %} 
         </div>
+        <!--
         <div class="img_result">
             <img src="{{ url_for('static', filename='Test_Sales.png') }}?v={{ range(1, 99999) | random }}">
         </div>
+        -->
         <div style="width: 25%; height: 45%"><canvas id="myChart"></canvas></div>
         <!-- Plot Section
         <div class="result">

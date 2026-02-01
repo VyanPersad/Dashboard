@@ -68,3 +68,10 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.savefig('static/Test_Sales.png')
 
     plt.close()
+
+def margin_calc(cost, price , vat=0.125):
+    if cost == 0 or price == 0 or cost ==None or price == None:
+        return 0    
+    else :
+        margin = (((price)/(1 + vat)) - cost) / ((price/(1 + vat))) * 100
+    return margin

@@ -5,30 +5,30 @@ def create_table():
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
     cursor.execute(
-        "CREATE TABLE IF NOT EXISTS product (code TEXT, model TEXT, price REAL)"
+        "CREATE TABLE IF NOT EXISTS product (code TEXT PRIMARY KEY, model TEXT, price REAL, cost REAL, margin REAL, stock INTEGER)"
     )
     data_comm.commit()
     data_comm.close()
 
-def insert(code, model, price):
+def insert(code, model, price, cost, stock):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
-    cursor.execute("INSERT INTO product VALUES (?,?,?)", (code, model, price))
+    cursor.execute("INSERT INTO product VALUES (?,?,?,?,?,?)", (code, model, price, cost, margin, stock))
     data_comm.commit()
     data_comm.close()
     code = ""
     model = ""
     price = ""
+    cost = ""
+    margin = ""
+    stock = ""
 
 def bulkInsert(bulk_data):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
-    cursor.executemany("INSERT INTO product VALUES (?,?,?)", bulk_data)
+    cursor.executemany("INSERT OR IGNORE INTO product VALUES (?,?,?,?,?,?)", bulk_data)
     data_comm.commit()
     data_comm.close()
-    code = ""
-    model = ""
-    price = ""
 
 def viewAll():
     data_comm = sqlite3.connect("product.db")

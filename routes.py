@@ -3,7 +3,6 @@ from datetime import datetime as dt
 from sqliteDB3 import *
 from xcelFunc import *
 
-
 def my_routes(app):
     @app.route('/', methods=['GET', 'POST'])
     def home():
@@ -53,6 +52,7 @@ def my_routes(app):
                 print("Going to viewLayout")
                 return redirect(url_for('viewLayout'))
         rows = viewAll()
+        print(rows)
         searchs = searchDB(search_term)  
 
         return render_template('index.html', year=year, day=day, month=month, rows=rows, searchs=searchs) 
@@ -61,6 +61,7 @@ def my_routes(app):
     def viewEntries():
         search_term = []
         searches = []
+        data =[]
         mainDF= read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Year',
         'April','May','June','July','August','September','October','November','December','January','February','March'], 
         searchCol='Year', searchTerm='This Year')

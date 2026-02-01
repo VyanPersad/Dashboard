@@ -33,7 +33,7 @@ html{
         margin-bottom: 5px;
         height: fit-content;  
         display: grid; 
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 10% 35% 10% 10% 10% 10%;
     }
     .col{
         font-size: 15px;
@@ -58,6 +58,7 @@ html{
         width: 125px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        column-gap: 5px;
     }
     #year{
         font-size: 50px;
