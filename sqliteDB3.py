@@ -5,7 +5,13 @@ def create_table():
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
     cursor.execute(
-        "CREATE TABLE IF NOT EXISTS product (code TEXT PRIMARY KEY, model TEXT, price REAL, cost REAL, margin REAL, stock INTEGER)"
+        "CREATE TABLE IF NOT EXISTS product (" \
+        "code TEXT PRIMARY KEY, " \
+        "model TEXT, " \
+        "price REAL, " \
+        "cost REAL, " \
+        "margin REAL, " \
+        "stock INTEGER)"
     )
     data_comm.commit()
     data_comm.close()

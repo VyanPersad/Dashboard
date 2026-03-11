@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-def read_from_file(filepath, test=0, n=5, header=None, col_Names = [], sheet = 0, searchTerm=None, searchCol=None):
+def read_from_file(filepath, col_Names = [], sheet = 0, searchTerm=None, searchCol=None, header=None, test=0, n=5 ):
     filetype = filepath.split('.')[1]
     #This will read the csv and display the first 5 rows of the data.
     if (filetype == 'csv'):
