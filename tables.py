@@ -60,3 +60,16 @@ def create_discount_table():
     )
     data_comm.commit()
     data_comm.close()
+
+def create_stk_table():
+    data_comm = sqlite3.connect("stock.db")
+    cursor = data_comm.cursor()
+    cursor.execute(
+        "CREATE TABLE IF NOT EXISTS stock (" \
+        "code TEXT PRIMARY KEY, " \
+        "stk_in_stores REAL), " \
+        "stk_in_wh REAL), " \
+        "stk_in_serviTech REAL)"                
+    )
+    data_comm.commit()
+    data_comm.close()
