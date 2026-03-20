@@ -52,10 +52,24 @@ def my_routes(app):
                 print("Going to viewLayout")
                 return redirect(url_for('viewLayout'))
         rows = viewAll()
-        print(rows)
+        #print(rows)
         searchs = searchDB(search_term)  
 
         return render_template('index.html', year=year, day=day, month=month, rows=rows, searchs=searchs) 
+
+    @app.route('/uploadFile', methods=['GET', 'POST'])
+    def uploadFile():
+        year = dt.now().year
+        day = dt.now().day 
+        month = dt.strftime(dt.now(),'%B')
+        if request.method == 'POST':
+            uploadedFile = request.files['file']
+            if uploadedFile:
+                file_path = os.path.join('uploads', uploadedFile.filename)
+                uploadedFile.save(file_path)
+
+        file_List = os.listdir('uploads')
+        return render_template('uploadFile.html', year=year, day=day, month=month, fileList=file_List)
 
     @app.route('/viewEntries', methods=['GET', 'POST'])
     def viewEntries():
