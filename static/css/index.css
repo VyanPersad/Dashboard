@@ -93,38 +93,8 @@ html{
         margin-bottom: 5px;
         margin-top: 5px;
     }
-    .hidden-input {
-        display: none;
-    }
-    #Input{
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-        text-align: center;
-        text-justify: auto;
-        border-radius: 5px;
-        height: 45px;
-        width: 350px;
-    }
-    #Button{
-        font-size: 20px;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        text-justify: auto;
-        margin-top: 10px;
-        border-radius: 5px;
-        height: 45px;
-        width: 150px;
-    }   
-    #addButton, #delButton, #updateButton,#serButton,#delAllButton, #goToButton, #clearButton{
-        font-size: 20px;
-        font-weight: bold;
-        color: #000000;
-        text-align: center;
-        text-justify: auto;
-        border-radius: 5px;
-        height: 45px;
-        width: 110px;
-        margin-top: 10px;
-    }
+
+    
+
+
+

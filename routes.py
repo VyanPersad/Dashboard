@@ -6,6 +6,20 @@ from xcelFunc import *
 def my_routes(app):
     @app.route('/', methods=['GET', 'POST'])
     def home():
+        year = dt.now().year
+        day = dt.now().day 
+        month = dt.strftime(dt.now(),'%B')
+        if request.method == 'POST':
+            if request.form.get("goToUpload")=="Go To Upload":
+                return redirect(url_for('uploadFile'))
+            
+            elif request.form.get("goToIndex")=="Go To Index":
+                return redirect(url_for('index'))
+            
+        return render_template('home.html', year=year, day=day, month=month) 
+
+    @app.route('/index', methods=['GET', 'POST'])
+    def index():
         search_term = None
         year = dt.now().year
         day = dt.now().day 

@@ -1,0 +1,30 @@
+    .Button{
+        font-size: 20px;
+        font-weight: bold;
+        background-color: transparent;
+        color: whitesmoke;
+        text-align: center;
+        text-justify: auto;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        border-color: whitesmoke;
+        border-width: 5px;
+        height: 50px;
+        width: 200px;
+    }   
+    .Button:hover{
+        background-color: whitesmoke;
+        color: #000000;
+        border-color: whitesmoke;
+        border-width: 5px;
+        height: 50px;
+        width: 200px;
+    }
+    .buttonList{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;    
+        gap: 20px;             
+        text-align: center;
+    }

@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/viewEntries.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
@@ -21,7 +22,7 @@
         -->
         <form class="serForm" method="POST">
             <input type="text" class="add" name="serCode">
-            <input type="submit" value="Search" name="serButton" id="serButton">
+            <input type="submit" class="Button" value="Search" name="serButton" id="serButton">
         </form>
         <div class="result">
             {% for search in searches %}
@@ -75,7 +76,7 @@
             {% endfor %}
         </div>
         <form class="delForm" method="POST">
-            <input type="Submit" value="Go To" name="goToButton" id="delButton">
+            <input type="Submit" class="Button"value="Go To" name="goToButton" id="delButton">
         </form>
             <script>
                 var ctx = document.getElementById('myChart').getContext('2d');

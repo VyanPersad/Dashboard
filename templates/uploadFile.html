@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">
     <body>
         <div class="time">
             <div id="year">{{year}}</div>
@@ -12,7 +13,7 @@
         <form action="/uploadFile" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" id ="Input" class="hidden-input">
             <label for = "Input" id="Input">Choose a file to upload</label>
-            <button type="submit" value="Upload" id="Button">Upload File</button>
+            <button type="submit" class="Button" value="Upload" id="Button">Upload File</button>
         </form>
         <div class="result"> 
             {% for file in fileList %}

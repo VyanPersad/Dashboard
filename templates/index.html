@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">
     <body>
         <div class="time">
             <div id="year">{{year}}</div>
@@ -14,22 +15,22 @@
                 <input type="text" class="add" name="addCode">
                 <input type="text" class="add" name="addModel">
                 <input type="text" class="add" name="addPrice">
-                <input type="submit" value="Add" name = addButton id="addButton">
+                <input type="submit" class="Button" value="Add" name = addButton>
             </form>
             <div class="sidebyside">
                 <form class="delForm" method="POST">
                     <input type="text" class="add" name="delCode">
-                    <input type="submit" value="Delete" name="delButton" id="delButton">
+                    <input type="submit" class="Button" value="Delete" name="delButton">
                 </form>
                 <form class="delForm" method="POST">
-                    <input type="Submit" value="Delete All" name="delAllButton" id="delButton">
+                    <input type="Submit" class="Button" value="Delete All" name="delAllButton" >
                 </form>
             </div>
             <form class="upDateForm" method="POST">
                 <input type="text" class="add" name="upCode">
                 <input type="text" class="add" name="upModel">
                 <input type="text" class="add" name="upPrice">
-                <input type="submit" value="Update" name = updateButton id="updateButton">
+                <input type="submit" class="Button" value="Update" class="Button" name = updateButton id="updateButton">
             </form>
         </div>
         <div class="result"> 
@@ -47,11 +48,11 @@
         <div class="sidebyside">
             <form class="serForm" method="POST">
                 <input type="text" class="add" name="serCode">
-                <input type="submit" value="Search" name="serButton" id="serButton">
+                <input type="submit" value="Search" class="Button" name="serButton" id="serButton">
             </form>
             <form>
                 <form class="Button" method="POST">
-                <input type="Submit" value="Clear All" name="clearButton" id="clearButton">
+                <input type="Submit" value="Clear All" class="Button" name="clearButton" id="clearButton">
                 </form>
             </form>
         </div>
@@ -61,10 +62,10 @@
             {% endfor %} 
         </div>
         <form class="Button" method="POST">
-            <input type="Submit" value="Go To" name="goToButton" id="delButton">
+            <input type="Submit" class="Button" value="Go To" name="goToButton" id="delButton">
         </form>
         <form class="Button" method="POST">
-            <input type="Submit" value="Go To View" name="goToButton" id="Button">
+            <input type="Submit" class="Button" value="Go To View" name="goToButton" id="Button">
         </form>
         <div class="parent">
             <div class="card">
