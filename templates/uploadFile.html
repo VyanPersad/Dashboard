@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">
     <body>
         <div class="time">
@@ -12,13 +12,17 @@
         </div>
         <form action="/uploadFile" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" id ="Input" class="hidden-input">
-            <label for = "Input" id="Input">Choose a file to upload</label>
+            <label for = "Input" id="Input" class="custom-file-upload">Choose a file to upload</label>
             <button type="submit" class="Button" value="Upload" id="Button">Upload File</button>
         </form>
         <div class="result"> 
             {% for file in fileList %}
                 <div class="row">
                     <div class="col">{{file}}</div>
+                    <form action="{{ url_for('deleteFile', file_Name=file) }}" method="POST">
+                        <button type="submit" class="Button" id="delButton" onclick="return confirm('Delete this file permanently?')">Delete
+                        </button>
+                    </form>
                 </div>
             {% endfor %} 
         </div>
@@ -31,3 +35,13 @@
         </div>      
     </body>
 </html>
+
+<!--
+This school also requires a bit of explanation specifically the path where we are using the HTML and the form action to set up A delete button for the delete route that was previously featured. In this instance form action calls for the URL of the delete file route this is basically the function that is applied on the delete file route located in the roads dot PY folder.
+
+The file name here specified refers to the path that has to be passed to the delete file function in the upload.py file. However the file variable refers to the file that is passed from the list specifically the file list So basically every file in the file list is referred to as file and when the specific delete button is clicked it passes the File name another 2 the delete _ function to be via the Os.removed function in Python.
+
+Again note that for the delete file function overall to work delete delete in the routes folder and subsequently we attach the file name To the U and we set up the delete file function which automatically takes the file name that we passed in the URL.
+
+This in tune then we finally took our specific delete file function which is located in the uploady file This is where perform the actual Python removal process with OS dot remove function and then we instruct the route to redirect to the upload file route so that the page can be ref The deleted file not be seen however the remaining files should be visible.
+-->
