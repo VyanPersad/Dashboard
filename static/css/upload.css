@@ -37,6 +37,14 @@ form{
         display: grid; 
         grid-template-columns: 10% 35% 10% 10% 10% 10%;
     }
+    .row_B{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 15px;
+        height: fit-content;  
+        display: grid; 
+        grid-template-columns: 45% 45%;
+    }
     .col{
         font-size: 15px;
     }
@@ -84,24 +92,7 @@ form{
         width: 200px;
     }
 
-.custom-file-upload {
-    display: inline-block;
-    line-height: 50px;
-    text-align: center;
-    height: 50px;
-    width: 250px;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: transparent;
-    color: whitesmoke;
-    text-align: center;
-    text-justify: auto;
-    margin-bottom: 10px;
-    border-radius: 15px;
-    border-style: solid;
-    border-color: whitesmoke;
-    border-width: 5px;
-}
+
 
 
 

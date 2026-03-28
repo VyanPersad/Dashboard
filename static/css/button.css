@@ -9,9 +9,27 @@
         border-radius: 15px;
         border-color: whitesmoke;
         border-width: 5px;
-        height: 50px;
+        height: 65px;
         width: 200px;
-    }   
+    } 
+    .custom-file-upload {
+        display: inline-block;
+        line-height: 50px;
+        text-align: center;
+        height: 50px;
+        width: 250px;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: transparent;
+        color: whitesmoke;
+        text-align: center;
+        text-justify: auto;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        border-style: solid;
+        border-color: whitesmoke;
+        border-width: 5px;
+    }  
     .Button:hover{
         background-color: whitesmoke;
         color: #000000;
@@ -27,6 +45,15 @@
         align-items: center;    
         gap: 20px;             
         text-align: center;
+    }
+
+    .check_box{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: whitesmoke;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 
     #delButton{

@@ -11,33 +11,65 @@
             </div>
         </div>
         <form action="/uploadFile" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" id ="Input" class="hidden-input">
-            <label for = "Input" id="Input" class="custom-file-upload">Choose a file to upload</label>
-            <button type="submit" class="Button" value="Upload" id="Button">Upload File</button>
-        </form>
-        <div class="result"> 
-            {% for file in fileList %}
-                <div class="row">
-                    <div class="col">{{file}}</div>
-                    <form action="{{ url_for('deleteFile', file_Name=file) }}" method="POST">
-                        <button type="submit" class="Button" id="delButton" onclick="return confirm('Delete this file permanently?')">Delete
-                        </button>
-                    </form>
-                </div>
-            {% endfor %} 
-        </div>
-
+            <div class="check_box">
+                <p>Select your file:</p>
+                <input type="radio" name="file_type" value="bsh" id="b"> <label for="b">BSH</label>
+                <input type="radio" name="file_type" value="pop" id="pp"> <label for="pp">PO Pending</label>
+                <input type="radio" name="file_type" value="aged" id="ag"> <label for="ag">Aged</label>
+            </div>    
+            <div>
+                <input type="file" name="file" id ="Input" class="hidden-input">
+                <label for = "Input" id="Input" class="custom-file-upload">Choose a file to upload</label>
+                <button type="submit" class="Button" value="Upload" id="Button">Upload File</button>
+            </div>
+        </form>           
         <div class="parent">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card">
+                <div class="result"> 
+                    {% for file in bsh_List %}
+                        <div class="row_B">
+                            <div class="col">{{file}}</div>
+                            <form action="{{ url_for('deleteFile', folder='BSH', file_Name=file) }}" method="POST">
+                                <button type="submit" class="Button" id="delButton" onclick="return confirm('Delete this file permanently?')">Delete
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %} 
+                </div>
+            </div>
+            <div class="card">
+                <div class="result"> 
+                    {% for file in pop_List %}
+                        <div class="row_B">
+                            <div class="col">{{file}}</div>
+                            <form action="{{ url_for('deleteFile', folder='PO_Pending', file_Name=file) }}" method="POST">
+                                <button type="submit" class="Button" id="delButton" onclick="return confirm('Delete this file permanently?')">Delete
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}  
+                </div>
+            </div>
+            <div class="card">
+                <div class="result"> 
+                    {% for file in aged_List %}
+                        <div class="row_B">
+                            <div class="col">{{file}}</div>
+                            <form action="{{ url_for('deleteFile', folder='Aged', file_Name=file) }}" method="POST">
+                                <button type="submit" class="Button" id="delButton" onclick="return confirm('Delete this file permanently?')">Delete
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}  
+                </div>
+            </div>
             <div class="card"></div>
         </div>      
     </body>
 </html>
 
 <!--
-This school also requires a bit of explanation specifically the path where we are using the HTML and the form action to set up A delete button for the delete route that was previously featured. In this instance form action calls for the URL of the delete file route this is basically the function that is applied on the delete file route located in the roads dot PY folder.
+This code also requires a bit of explanation specifically the path where we are using the HTML and the form action to set up A delete button for the delete route that was previously featured. In this instance form action calls for the URL of the delete file route this is basically the function that is applied on the delete file route located in the roads dot PY folder.
 
 The file name here specified refers to the path that has to be passed to the delete file function in the upload.py file. However the file variable refers to the file that is passed from the list specifically the file list So basically every file in the file list is referred to as file and when the specific delete button is clicked it passes the File name another 2 the delete _ function to be via the Os.removed function in Python.
 

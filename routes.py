@@ -79,12 +79,12 @@ def my_routes(app):
     @app.route('/uploadFile', methods=['GET', 'POST'])
     def uploadFile():
         year, day, month = date_File()
-        file_List = upload_File()
-        return render_template('uploadFile.html', year=year, day=day, month=month, fileList=file_List)
+        bsh_List, pop_List, aged_List = upload_File()
+        return render_template('uploadFile.html', year=year, day=day, month=month, bsh_List=bsh_List, pop_List=pop_List, aged_List=aged_List)
 
-    @app.route('/deleteFile/<file_Name>', methods=['POST'])
-    def deleteFile(file_Name):
-        delete_File(file_Name)
+    @app.route('/deleteFile/<folder>/<file_Name>', methods=['POST','GET'])
+    def deleteFile(folder,file_Name):
+        delete_File(folder, file_Name)
         return redirect(url_for('uploadFile'))
 
     @app.route('/viewEntries', methods=['GET', 'POST'])
