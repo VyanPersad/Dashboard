@@ -1,0 +1,47 @@
+body {
+            background-color: #0a0a0a;
+            color: #ffc400; /* Classic Terminal Amber */
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+        }
+
+        .flight-board {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            background-color: #111;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        th {
+            text-align: left;
+            text-transform: uppercase;
+            color: #888;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        td {
+            background-color: #1a1a1a;
+            padding: 15px 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid #222;
+        }
+
+        /* Status colors */
+        .status-on-time { color: #00ff41; }
+        .status-delayed { color: #ff3e3e; }
+        
+        /* The "Split-Flap" look */
+        .cell-text {
+            display: inline-block;
+            background: linear-gradient(to bottom, #222 50%, #111 50%);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }

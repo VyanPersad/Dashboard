@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime as dt
 from sqliteDB3 import *
 from viewEntries import viewEntries_File
+from arrival import arrival_File
 from xcelFunc import *
 
 from upload import upload_File, delete_File
@@ -19,6 +20,9 @@ def my_routes(app):
             
             elif request.form.get("goToEntries")=="Go To Entries":
                 return redirect(url_for('viewEntries'))
+            
+            elif request.form.get("goToPo")=="Go To PO Pending":
+                return redirect(url_for('arrivals'))
             
             year, day, month = date_File()
         return render_template('home.html', year=year, day=day, month=month) 
@@ -89,11 +93,15 @@ def my_routes(app):
 
     @app.route('/viewEntries', methods=['GET', 'POST'])
     def viewEntries():
+        
+        result = viewEntries_File()
+
+        if result == "REDIRECT":
+            return redirect(url_for('home'))
+        
         searches, outputs, months, data = viewEntries_File()
 
-        rows = viewAll()
-
-        return render_template('viewEntries.html', rows=rows, searches=searches, outputs=outputs, months=months, chart_labels = months, chart_data = data)
+        return render_template('viewEntries.html', rows=searches, searches=searches, outputs=outputs, months=months, chart_labels = months, chart_data = data)
         
     @app.route('/layout', methods=['GET', 'POST'])
     def viewLayout():
@@ -102,3 +110,13 @@ def my_routes(app):
                 return redirect(url_for('home'))
 
         return render_template('viewLayout.html')
+
+    @app.route('/arrivals', methods=['GET', 'POST'])
+    def arrivals():
+        if request.method == 'POST':
+            if request.form.get("goToHome")=="Go To Home":
+                return redirect(url_for('home'))
+
+        containers = arrival_File()
+
+        return render_template('arrival.html', containers=containers)

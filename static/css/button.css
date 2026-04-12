@@ -1,72 +1,96 @@
-    .Button{
-        font-size: 20px;
-        font-weight: bold;
-        background-color: transparent;
-        color: whitesmoke;
-        text-align: center;
-        text-justify: auto;
-        margin-bottom: 10px;
-        border-radius: 15px;
-        border-color: whitesmoke;
-        border-width: 5px;
-        height: 65px;
-        width: 200px;
-    } 
-    .custom-file-upload {
-        display: inline-block;
-        line-height: 50px;
-        text-align: center;
-        height: 50px;
-        width: 250px;
-        font-size: 20px;
-        font-weight: bold;
-        background-color: transparent;
-        color: whitesmoke;
-        text-align: center;
-        text-justify: auto;
-        margin-bottom: 10px;
-        border-radius: 15px;
-        border-style: solid;
-        border-color: whitesmoke;
-        border-width: 5px;
-    }  
-    .Button:hover{
-        background-color: whitesmoke;
-        color: #000000;
-        border-color: whitesmoke;
-        border-width: 5px;
-        height: 50px;
-        width: 200px;
-    }
-    .buttonList{
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-        align-items: center;    
-        gap: 20px;             
-        text-align: center;
-    }
+/* Container for your buttons */
+.buttonList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    gap: 20px;             
+    background-color: #050505; /* Deep black terminal background */
+    padding: 30px;
+}
 
-    .check_box{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        color: whitesmoke;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
+/* Base style for all Action Buttons */
+.Button {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    background-color: #1a1a1a;
+    color: #ffc400; /* Classic Flight Board Amber */
+    
+    border: 2px solid #333;
+    border-bottom: 4px solid #000; /* Gives a "split-flap" depth */
+    border-radius: 4px; /* Slightly rounded, but mostly industrial */
+    
+    height: 65px;
+    width: 220px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
 
-    #delButton{
-        font-size: 15px;
-        font-weight: bold;
-        background-color: transparent;
-        color: red;
-        text-align: center;
-        text-justify: auto;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border-color: red;
-        border-width: 1px;
-        height: 30px;
-        width: 80px;
-    }
+.Button:hover {
+    background-color: #ffc400;
+    color: #000;
+    border-color: #fff;
+    /* Removed the height change to prevent the page from jumping */
+    box-shadow: 0 0 15px rgba(255, 196, 0, 0.4);
+}
+
+/* File Upload specifically */
+.custom-file-upload {
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    height: 55px;
+    width: 280px;
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    background-color: #000;
+    color: #00ff41; /* "Matrix" Green for uploads/input */
+    
+    border: 2px solid #00ff41;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* The Grid for Checkboxes */
+.check_box {
+    margin: 20px 0;
+    color: #888; /* Dimmer text for secondary options */
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid #222;
+    background: #0a0a0a;
+}
+
+/* Danger/Delete Button */
+#delButton {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    background-color: #2b0000;
+    color: #ff3e3e; /* Warning Red */
+    
+    border: 1px solid #ff3e3e;
+    border-radius: 3px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+}
+
+#delButton:hover {
+    background-color: #ff3e3e;
+    color: #000;
+}
