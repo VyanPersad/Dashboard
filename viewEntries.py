@@ -5,11 +5,14 @@ def viewEntries_File():
     search_term = []
     searches = []
     data = []
-    mainDF = read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Year',
+    mainDF = read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Average Weighted Cost','Year',
     'April','May','June','July','August','September','October','November','December','January','February','March'], 
     searchCol='Year', searchTerm='This Year')
     mainDF = mainDF[mainDF['Year'] == 'This Year']
+    mainDF['Margin'] = mainDF.apply(lambda row: margin_calc(row['Average Weighted Cost'], row['Cash Price']), axis=1)
     mainDF['Cash Price'] = mainDF['Cash Price'].round(2).apply(lambda x: f'{x:.2f}')
+    mainDF['Cost Price'] = mainDF['Average Weighted Cost'].round(2).apply(lambda x: f'{x:.2f}')
+    mainDF['Margin'] =  mainDF['Margin'].round(2).apply(lambda x: f'{x:.2f}')
     mainDF['Description'] = mainDF['Description'].str.split('- ').str[1] 
     months = ['April', 'May', 'June', 
                   'July', 'August', 'September',
@@ -34,7 +37,7 @@ def viewEntries_File():
 
         elif request.form.get("goToButton")=="Go To":
             print("Going to home")
-            return "REDIRECT", None ,None, None   
+            return "REDIRECT", [] ,[], []   
 
     return searches, outputs, months, data   
         

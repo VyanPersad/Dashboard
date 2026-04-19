@@ -96,7 +96,7 @@ def my_routes(app):
         
         result = viewEntries_File()
 
-        if result == "REDIRECT":
+        if result[0] == "REDIRECT":
             return redirect(url_for('home'))
         
         searches, outputs, months, data = viewEntries_File()

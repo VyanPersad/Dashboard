@@ -60,6 +60,27 @@
             {% endfor %} 
         </div> -->
         <div class="result">
+            <div class="row">
+                <div>Sku</div>
+                <div>Brand</div>
+                <div>Description</div>
+                <div class="cash">
+                    <div>Cost Price</div>
+                </div>
+                <div class="cash">
+                    <div>Cash Price</div>
+                </div>
+                <div class="cash">
+                    <div>Margin</div>
+                </div>
+                <div class="month">
+                        
+                </div>
+            </div>
+        </div>    
+        
+        <div class="result">
+            
             {% for output in outputs %}
                 <div class="row">
                     <div>{{output.Sku}}</div>
@@ -67,8 +88,13 @@
                     <div>{{output.Description}}</div>
                     <div class="cash">
                         <div>$</div> 
+                        <div>{{output['Cost Price']}}</div>
+                    </div>
+                    <div class="cash">
+                        <div>$</div> 
                         <div>{{output['Cash Price']}}</div>
                     </div>
+                    <div>{{output['Margin']}}</div>
                     <div class="month">
                         {% for month in months %}
                         <div>{{output[month]}}</div>
@@ -80,6 +106,7 @@
         <form class="delForm" method="POST">
             <input type="Submit" class="Button"value="Go To" name="goToButton" id="delButton">
         </form>
+
             <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
