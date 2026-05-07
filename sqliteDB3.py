@@ -1,21 +1,6 @@
 #No need to install sqproduct3 as it is included in python3
 import sqlite3
 
-def create_table():
-    data_comm = sqlite3.connect("product.db")
-    cursor = data_comm.cursor()
-    cursor.execute(
-        "CREATE TABLE IF NOT EXISTS product (" \
-        "code TEXT PRIMARY KEY, " \
-        "model TEXT, " \
-        "price REAL, " \
-        "cost REAL, " \
-        "margin REAL, " \
-        "stock INTEGER)"
-    )
-    data_comm.commit()
-    data_comm.close()
-
 def insert(code, model, price, cost, stock):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()

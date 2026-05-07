@@ -1,26 +1,29 @@
 import sqlite3
 
+def create_prod_table():
+    data_comm = sqlite3.connect("product.db")
+    cursor = data_comm.cursor()
+    cursor.execute(
+        "CREATE TABLE IF NOT EXISTS product (" \
+        "code TEXT PRIMARY KEY, " \
+        "model TEXT, " \
+        "price REAL, " \
+        "cost REAL, " \
+        "margin REAL, " \
+        "stock INTEGER)"
+    )
+    data_comm.commit()
+    data_comm.close()
+
 def create_model_table():
-    data_comm = sqlite3.connect("model.db")
+    data_comm = sqlite3.connect("model_brand.db")
     cursor = data_comm.cursor()
     cursor.execute(
         "CREATE TABLE IF NOT EXISTS model (" \
         "code TEXT PRIMARY KEY, " \
         "model TEXT, " \
-        "class TEXT)"
-    )
-    data_comm.commit()
-    data_comm.close()
-
-def create_brand_table():
-    data_comm = sqlite3.connect("brand.db")
-    cursor = data_comm.cursor()
-    cursor.execute(
-        "CREATE TABLE IF NOT EXISTS brand (" \
-        "code TEXT PRIMARY KEY, " \
         "brand TEXT, " \
-        "model TEXT, " \
-        "description TEXT)"
+        "class TEXT)"
     )
     data_comm.commit()
     data_comm.close()
@@ -70,6 +73,7 @@ def create_stk_table():
     cursor.execute(
         "CREATE TABLE IF NOT EXISTS stock (" \
         "code TEXT PRIMARY KEY, " \
+        "date DATE, " \
         "stk_in_stores REAL, " \
         "stk_in_wh REAL, " \
         "stk_in_serviTech REAL)"                
