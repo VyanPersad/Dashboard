@@ -1,11 +1,11 @@
 from xcelFunc import read_from_file, margin_calc
-from sqliteDB3 import insert, bulkInsert
+from tables import insert, bulkInsert
 
 col_Names = ['Sku','Brand', 'Description', 'Cash Price','Year','Stock On Hand','Average Weighted Cost']
 searchTerm = 'This Year' 
 searchCol = 'Year'
 
-df = read_from_file('resources\\BuyerSalesHistory.csv', col_Names , searchTerm, searchCol, header=None, test=0, n=0)
+df = read_from_file('C:\Users\Vyan\Documents\GitHub\Dashboard\uploads\BSH\BuyerSalesHistory.csv', col_Names , searchTerm, searchCol, header=None, test=0, n=0)
 df['Cash_Price'] = df['Cash Price'].round(2)
 df['Stock_On_Hand'] = df['Stock On Hand']
 df['Cost'] = df['Average Weighted Cost'].round(2)

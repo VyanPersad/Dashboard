@@ -1,0 +1,36 @@
+<html>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arrival.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/button.css') }}">
+
+    <div class="buttonList">
+            <form method="POST">
+                <input type="Submit" class="Button" value="Go To Home" name="goToHome" >
+            </form>
+        </div>
+
+    <table class="flight-board">
+        <thead>
+            <tr>
+                <th>Container No.</th>
+                <th>Supplier</th>
+                <th>Description</th>
+                <th>RWT</th>
+                <th>ETA</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in containers %}
+            <tr>
+                <td><span class="cell-text">{{ item['CONTAINER#'] }}</span></td>
+                <td><span class="cell-text">{{ item['SUPPLIER'] }}</span></td>
+                <td><span class="cell-text">{{ item['DESCRIPTIONS'] }}</span></td>
+                <td><span class="cell-text">{{ item['RWT'] }}</span></td>
+                <td><span class="cell-text">{{ item['ETA'] }}</span></td>
+                <td><span class="cell-text">{{ item['STATUS'] }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+
+</html>

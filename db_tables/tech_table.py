@@ -28,7 +28,7 @@ def insert_tech(model, tech_1, tech_2, resolution):
 def bulkInsert_tech(bulk_data):
     data_comm = sqlite3.connect("tech.db")
     cursor = data_comm.cursor()
-    cursor.executemany("INSERT OR IGNORE INTO tech VALUES (?,?,?,?,?,?)", bulk_data)
+    cursor.executemany("INSERT OR IGNORE INTO tech VALUES (?,?,?,?)", bulk_data)
     data_comm.commit()
     data_comm.close()
 

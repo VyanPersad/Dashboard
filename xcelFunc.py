@@ -72,6 +72,8 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.close()
 
 def margin_calc(cost, price , vat=0.125):
+    cost = float(cost)
+    price = float(price)
     if cost == 0 or price == 0 or cost ==None or price == None:
         return 0    
     else :

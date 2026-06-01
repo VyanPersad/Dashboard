@@ -11,12 +11,18 @@
             </div>
         </div>
         <div>
+            <div class="row"> 
+                <div class="col">"Code"</div>
+                <div class="col">"Model"</div>
+                <div class="col">"Price"</div>
+            </div>
             <form class="addForm" method="POST">
                 <input type="text" class="add" name="addCode">
                 <input type="text" class="add" name="addModel">
                 <input type="text" class="add" name="addPrice">
                 <input type="submit" class="Button" value="Add" name = addButton>
             </form>
+            
             <div class="sidebyside">
                 <form class="delForm" method="POST">
                     <input type="text" class="add" name="delCode">
@@ -25,6 +31,11 @@
                 <form class="delForm" method="POST">
                     <input type="Submit" class="Button" value="Delete All" name="delAllButton" >
                 </form>
+            </div>
+            <div class="row"> 
+                <div class="col">"Code"</div>
+                <div class="col">"Model"</div>
+                <div class="col">"Price"</div>
             </div>
             <form class="upDateForm" method="POST">
                 <input type="text" class="add" name="upCode">
@@ -50,23 +61,29 @@
                 <input type="text" class="add" name="serCode">
                 <input type="submit" value="Search" class="Button" name="serButton" id="serButton">
             </form>
-            <form>
-                <form class="Button" method="POST">
+            <form class="Button" method="POST">
                 <input type="Submit" value="Clear All" class="Button" name="clearButton" id="clearButton">
-                </form>
             </form>
         </div>
-        <div class="result">
+        <div class="result">   
             {% for search in searchs %}
-                <div class="row">{{search.code}} {{search.model}} {{search.price}}</div>
+                <div class="row"> 
+                    <div class="col">{{search.code}}</div>
+                    <div class="col">{{search.model}}</div>
+                    <div class="col">{{search.price}}</div>
+                    <div class="col">{{search.margin}}</div>
+                </div>
             {% endfor %} 
-        </div>
-        <form class="Button" method="POST">
-            <input type="Submit" class="Button" value="Go To" name="goToButton" id="delButton">
-        </form>
-        <form class="Button" method="POST">
-            <input type="Submit" class="Button" value="Go To View" name="goToButton" id="Button">
-        </form>
+        </div>    
+        <div class="sidebyside">
+            <form class="Button" method="POST">
+                <input type="Submit" class="Button" value="Go To" name="goToButton" id="delButton">
+            </form>
+            <form class="Button" method="POST">
+                <input type="Submit" class="Button" value="Go To View" name="goToButton" id="Button">
+            </form>
+        </div>    
+
         <div class="parent">
             <div class="card">
 

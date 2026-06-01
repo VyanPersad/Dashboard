@@ -24,7 +24,6 @@ def insert_mb(code, model, brand, sku_class):
     brand = ""
     sku_class = ""
 
-
 def bulkInsert_mb(bulk_data):
     data_comm = sqlite3.connect("model_brand.db")
     cursor = data_comm.cursor()

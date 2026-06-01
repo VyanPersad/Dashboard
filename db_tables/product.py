@@ -1,6 +1,8 @@
 #No need to install sqproduct3 as it is included in python3
 import sqlite3
 
+from xcelFunc import margin_calc
+
 def insert(code, model, price, cost, stock):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
@@ -11,13 +13,13 @@ def insert(code, model, price, cost, stock):
     model = ""
     price = ""
     cost = ""
-    margin = ""
+    margin = margin_calc(cost, price)
     stock = ""
 
 def bulkInsert(bulk_data):
     data_comm = sqlite3.connect("product.db")
     cursor = data_comm.cursor()
-    cursor.executemany("INSERT OR IGNORE INTO product VALUES (?,?,?,?,?,?)", bulk_data)
+    cursor.executemany("INSERT OR REPLACE INTO product VALUES (?,?,?,?,?,?)", bulk_data)
     data_comm.commit()
     data_comm.close()
 
@@ -53,9 +55,18 @@ def deleteAll():
 
 def update(code, model, price):
     data_comm = sqlite3.connect("product.db")
+    data_comm.row_factory = sqlite3.Row
     cursor = data_comm.cursor()
-    cursor.execute("UPDATE product SET model=?, price=? WHERE code=?",
-                   (model, price, code))
+    cost, margin = None, None
+    if code:
+        code = f"%{code}%"
+        cursor.execute("SELECT * FROM product WHERE code LIKE ?", (code,))
+        rows = cursor.fetchall()
+        cost = rows[0]['cost']
+    
+    margin = margin_calc(cost, price)
+    cursor.execute("UPDATE product SET model=?, price=?, margin=? WHERE code=?",
+                   (model, price, margin, code))
     data_comm.commit()
     data_comm.close()
 
@@ -76,18 +87,4 @@ def searchDB(search_term):
         formatted_rows.append(formatted_row)
     return formatted_rows
 
-'''
-#create_table()
 
-insert("Wine Glass", 12, 12.50)
-insert("Beer Glass", 6, 10.50)
-insert("Tea Cup", 6, 3.50)
-
-print(viewAll())
-delete("Wine Glass")
-delete("Beer Glass")
-update(5, 4.50, "Tea Cup")
-print(viewAll())
-deleteAll()
-print(viewAll())
-'''
