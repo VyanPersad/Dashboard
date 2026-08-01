@@ -22,4 +22,5 @@ def arrival_Log():
         ]
     
     arrival = arrival.sort_values(by='Month', ascending=True)
+    
     return arrival

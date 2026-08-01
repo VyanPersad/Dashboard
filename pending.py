@@ -22,4 +22,5 @@ def arrival_File():
     poDF = poDF.sort_values(by='Expected Delivery Date', ascending=True)
     poDF['Expected Delivery Date'] = poDF['Expected Delivery Date'].dt.strftime('%A, %d %B %Y')
     arrival_list = poDF.to_dict(orient='records')
+    
     return arrival_list

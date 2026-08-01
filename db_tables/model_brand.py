@@ -16,7 +16,7 @@ def create_model_table():
 def insert_mb(code, model, brand, sku_class):
     data_comm = sqlite3.connect("model_brand.db")
     cursor = data_comm.cursor()
-    cursor.execute("INSERT INTO model VALUES (?,?,?,?)", (code, model, brand, sku_class))
+    cursor.execute("INSERT INTO model (code, model, brand, sku_class) VALUES (?,?,?,?)", (code, model, brand, sku_class))
     data_comm.commit()
     data_comm.close()
     code = ""

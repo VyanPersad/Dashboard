@@ -15,9 +15,9 @@ def insert(code, model, price, cost, stock):
     cost = ""
     margin = margin_calc(cost, price)
     stock = ""
-
+    
 def bulkInsert(bulk_data):
-    data_comm = sqlite3.connect("product.db")
+    data_comm = sqlite3.connect(r"C:\Users\Vyan\Documents\GitHub\Dashboard\product.db")
     cursor = data_comm.cursor()
     cursor.executemany("INSERT OR REPLACE INTO product VALUES (?,?,?,?,?,?)", bulk_data)
     data_comm.commit()
@@ -53,20 +53,18 @@ def deleteAll():
     data_comm.close()
     print("Everything Deleted")
 
-def update(code, model, price):
+def update(code, model, cost, price):
     data_comm = sqlite3.connect("product.db")
     data_comm.row_factory = sqlite3.Row
     cursor = data_comm.cursor()
-    cost, margin = None, None
     if code:
         code = f"%{code}%"
         cursor.execute("SELECT * FROM product WHERE code LIKE ?", (code,))
         rows = cursor.fetchall()
-        cost = rows[0]['cost']
     
     margin = margin_calc(cost, price)
-    cursor.execute("UPDATE product SET model=?, price=?, margin=? WHERE code=?",
-                   (model, price, margin, code))
+    cursor.execute("UPDATE product SET model=?, price=?, margin=?, cost=? WHERE code=?",
+                   (model, price, margin, cost, code))
     data_comm.commit()
     data_comm.close()
 

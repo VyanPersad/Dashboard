@@ -72,10 +72,11 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.close()
 
 def margin_calc(cost, price , vat=0.125):
+    if pd.isna(cost) or pd.isna(price) or float(cost) == 0 or float(price) == 0:
+        return 0.0
     cost = float(cost)
     price = float(price)
-    if cost == 0 or price == 0 or cost == None or price == None:
-        return 0    
-    else :
-        margin = (((price)/(1 + vat)) - cost) / ((price/(1 + vat))) * 100
+
+    margin = (((price)/(1 + vat)) - cost) / ((price/(1 + vat))) * 100
+
     return margin

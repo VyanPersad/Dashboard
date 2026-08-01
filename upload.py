@@ -35,7 +35,7 @@ def upload_File():
 """
 So this bit of code requires a significant amount of explanation in the sense that it actually does a fair bit of work So the first thing it checks for is the fact than when we have your button click with the request log method equal POST this checks if we had clicked into it it will automatically generate the file list of what is located in the upload directory. 
 
-However for facilitating a refresh the POST is not always generated but rather in GET as such we have the if else statements to cater to that. So for an instance if once the folder exists and they files within the directory it automatically populates the file list other than that it generates a null or empty file list which allows for a value to be passed to the return for a function which avoids the error of the file list being null but rather an empty or or list.
+However for facilitating a refresh the POST is not always generated but rather in GET as such we have the if else statements to cater to that. So for an instance if once the folder exists and there are files within the directory it automatically populates the file list other than that it generates a null or empty file list which allows for a value to be passed to the return for a function which avoids the error of the file list being null but rather an empty or or list.
 """
 
 def delete_File(folder, file_Name):
