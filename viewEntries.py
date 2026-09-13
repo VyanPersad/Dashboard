@@ -32,7 +32,7 @@ def viewEntries_File():
             else:
                 results = searches.to_dict(orient='records')
                 results = results[0]
-                #linePlot(mainDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
+                linePlot(mainDF, searchTerm=search_term, title='Sales', xlabel='Month', ylabel='Sales', xloc=1.10, yloc=0.5)
                 data = [results[m] for m in months]
 
         elif request.form.get("goToButton")=="Go To":
