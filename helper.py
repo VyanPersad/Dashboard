@@ -1,6 +1,6 @@
 from db_tables import product
 
-from tables import create_prod_table
+from db_tables.tables import create_prod_table
 
 #create_prod_table()
 

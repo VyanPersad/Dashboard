@@ -1,4 +1,3 @@
-from turtle import pd
 
 from xcelFunc import read_from_file, margin_calc
 from product import bulkInsert

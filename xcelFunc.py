@@ -45,8 +45,8 @@ def readCols(dataFrame, colName1, colName2, colName3):
     dF = dataFrame[[colName1, colName2, colName3]]
     return dF
 
-def search_DF(dataFrame, searchTerm):
-    df = dataFrame[dataFrame['Sku'] == searchTerm]
+def search_DF(dataFrame, colName, searchTerm):
+    df = dataFrame[dataFrame[colName] == searchTerm]
     return df
 
 def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):   
@@ -72,6 +72,7 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     plt.close()
 
 def margin_calc(cost, price , vat=0.125):
+    
     cost = float(cost)
     price = float(price)
     if cost == 0 or price == 0 or cost == None or price == None:
