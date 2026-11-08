@@ -5,7 +5,7 @@ from pandas import test
 from arrival import arrival_Log
 
 from viewEntries import viewEntries_File
-from pending import arrival_File
+from pending import pending_File
 from xcelFunc import *
 from db_tables.product import *
 
@@ -104,10 +104,10 @@ def my_routes(app):
         
         result = viewEntries_File()
 
-        if result[0] == "REDIRECT":
+        if isinstance(result, str) and result == "REDIRECT":
             return redirect(url_for('home'))
         
-        searches, outputs, months, data = viewEntries_File()
+        searches, outputs, months, data = result
 
         return render_template('viewEntries.html', rows=searches, searches=searches, outputs=outputs, months=months, chart_labels = months, chart_data = data)
         
@@ -119,15 +119,15 @@ def my_routes(app):
 
         return render_template('viewLayout.html')
 
-    @app.route('/arrivals', methods=['GET', 'POST'])
+    @app.route('/pending', methods=['GET', 'POST'])
     def arrivals():
         if request.method == 'POST':
             if request.form.get("goToHome")=="Go To Home":
                 return redirect(url_for('home'))
 
-        containers = arrival_File()
+        containers = pending_File()
 
-        return render_template('arrival.html', containers=containers)
+        return render_template('pending.html', containers=containers)
     
     @app.route('/arrival_log', methods=['GET', 'POST'])
     def arrival_log():

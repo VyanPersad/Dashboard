@@ -1,11 +1,12 @@
 from flask import redirect, redirect, request, url_for
+from tabulate import tabulate
 from xcelFunc import *
 
 def viewEntries_File():
     search_term = []
     searches = []
     data = []
-    mainDF = read_from_file('resources\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Average Weighted Cost','Year',
+    mainDF = read_from_file('uploads\\BSH\\BuyerSalesHistory.csv', test=1, n=0, col_Names = ['Sku','Brand', 'Description', 'Cash Price','Average Weighted Cost','Year',
     'April','May','June','July','August','September','October','November','December','January','February','March'], 
     searchCol='Year', searchTerm='This Year')
     mainDF = mainDF[mainDF['Year'] == 'This Year']
@@ -19,13 +20,13 @@ def viewEntries_File():
                   'October', 'November', 'December', 
                   'January', 'February', 'March']        
     outputs = mainDF.to_dict(orient='records')        
-
+    #print(tabulate(outputs, headers="keys", tablefmt="grid"))
     if request.method == 'POST':
 
         if request.form.get("serButton")=="Search":
             search_term = request.form.get("serCode")
-            searches = search_DF(mainDF, search_term)
-
+            searches = search_DF(mainDF, 'Sku', search_term)
+            print(tabulate(searches, headers="keys", tablefmt="grid"))
             if searches.empty:
                 searches = []
                 data = [0 for m in months]
@@ -37,7 +38,7 @@ def viewEntries_File():
 
         elif request.form.get("goToButton")=="Go To":
             print("Going to home")
-            return "REDIRECT", [] ,[], []   
+            return "REDIRECT"   
 
     return searches, outputs, months, data   
         

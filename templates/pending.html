@@ -7,24 +7,30 @@
                 <input type="Submit" class="Button" value="Go To Home" name="goToHome" >
             </form>
         </div>
-
     <table class="flight-board">
         <thead>
             <tr>
+                <th>Class</th>
                 <th>Brand</th>
+                <th>Courts Code</th>
                 <th>Model</th>
                 <th>Description</th>
-                <th>ETA</th>
-
+                <th>PO</th>
+                <th>Expected Delivery Date</th>
+                <th>Pending</th>
             </tr>
         </thead>
         <tbody>
             {% for item in containers %}
             <tr>
+                <td><span class="cell-text">{{ item['Class'] }}</span></td>
                 <td><span class="cell-text">{{ item['Brand'] }}</span></td>
+                <td><span class="cell-text">{{ item['Code Courts'] }}</span></td>
                 <td><span class="cell-text">{{ item['Model'] }}</span></td>
                 <td><span class="cell-text">{{ item['Description'] }}</span></td>
+                <td><span class="cell-text">{{ item['PO'] }}</span></td>
                 <td><span class="cell-text">{{ item['Expected Delivery Date'] }}</span></td>
+                <td><span class="cell-text">{{ item['Pending'] }}</span></td>
             </tr>
             {% endfor %}
         </tbody>

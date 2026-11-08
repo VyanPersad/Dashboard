@@ -40,18 +40,52 @@ def read_from_file(filepath, col_Names = [], sheet = 0, searchTerm=None, searchC
             print(dataFrame.head(n))
 
         return dataFrame
-    
+
+def read_from_file_2(filepath, test=0, n=5, col_Names = [], sheet = 0):
+    filetype = filepath.split('.')[1]
+
+    #This will read the csv and display the first 5 rows of the data.
+    if (filetype == 'csv'):
+        if (col_Names == []):
+            dataFrame = pd.read_csv(filepath)
+            #dataFrame = pd.read_csv(filepath, sep=';')
+            if (test == 0):
+                print('Set test to 1 to view sample dataframes, Default is the first 5 rows, set n to vary the number of rows.')
+            elif (test == 1):
+                print(dataFrame.head(n))
+        elif (col_Names != []):
+            dataFrame = pd.read_csv(filepath, names=col_Names)
+            #dataFrame = pd.read_csv(filepath, sep=';')
+            if (test == 0):
+                print('Set test to 1 to view sample dataframes, Default is the first 5 rows, set n to vary the number of rows.')
+            elif (test == 1):
+                print(dataFrame.head(n))
+
+        return dataFrame
+
+    elif filetype in ['xlsx', 'xls', 'xlsm']:
+        xlFile = pd.ExcelFile(filepath)
+        sheetName = xlFile.sheet_names[sheet]
+        dataFrame = xlFile.parse(f'{sheetName}')
+        if (test == 0):
+          print('Set test to 1 to view sample datraframes, Default is the first 5 rows, set n to vary the numbe rof rows.')
+        elif (test == 1):
+          print(dataFrame.head(n))
+
+        return dataFrame
+  
 def readCols(dataFrame, colName1, colName2, colName3):
     dF = dataFrame[[colName1, colName2, colName3]]
     return dF
 
 def search_DF(dataFrame, colName, searchTerm):
-    df = dataFrame[dataFrame[colName] == searchTerm]
+
+    df = dataFrame[dataFrame[colName].astype(str).str.strip().str.lower() == searchTerm]
     return df
 
 def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axis', xloc=1.10, yloc=0.5):   
     thisYear = dataFrame[dataFrame['Year'] == 'This Year']
-    selectSKU = thisYear[thisYear['Sku'] == searchTerm]
+    selectSKU = thisYear[thisYear['Sku'].astype(str).str.strip().str.lower() == searchTerm]
     all_month_names = ['April', 'May', 'June','July', 'August', 'September', 
                        'October', 'November', 'December','January', 'February', 'March']
     month_abbr = ['Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 
@@ -60,7 +94,7 @@ def linePlot(dataFrame, searchTerm, title='None', xlabel='X-Axis', ylabel='Y-Axi
     selectSKU = selectSKU.T
     selectSKU = selectSKU[selectSKU.index.isin(all_month_names)]
     #print(selectSKU)
-    plt.plot(selectSKU.index, selectSKU[searchTerm], marker='', label='')
+    plt.plot(selectSKU.index, selectSKU.iloc[:, 0], marker='', label='')
     plt.title(title)
     plt.xlabel(xlabel)
     plt.xticks(ticks=all_month_names, labels=month_abbr)
